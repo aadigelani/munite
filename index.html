@@ -1,0 +1,2034 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MUNITE — Draft Resolution: Building The Next Generation Of Global Leaders</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&family=Inter:wght@300;400;500;600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+<!-- Firebase SDK -->
+<script type="module">
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
+  import { getFirestore, collection, addDoc, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
+
+  // ── PASTE YOUR FIREBASE CONFIG HERE ──
+  const firebaseConfig = {
+    apiKey: "AIzaSyCeEFqHujlHHAkr8Bq7uOG8CTXYY1Vfd60",
+    authDomain: "munite-acf5d.firebaseapp.com",
+    projectId: "munite-acf5d",
+    storageBucket: "munite-acf5d.firebasestorage.app",
+    messagingSenderId: "785242774756",
+    appId: "1:785242774756:web:2aea5a47dd93d9fbd260f1"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  window.__firebaseDB = db;
+  window.__firestoreAdd = addDoc;
+  window.__firestoreCollection = collection;
+  window.__firestoreServerTimestamp = serverTimestamp;
+</script>
+
+<style>
+/* ══════════════════════════════════════════
+   RESET & ROOT
+══════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:      #0A0A0D;
+  --paper:   #121117;
+  --text:    #FAFAFA;
+  --muted:   #ACA8B8;
+  --accent:  #8A79C9;
+  --accent2: #D9D0F5;
+  --border:  #2A2735;
+  --hover:   #EEE8FF;
+  --paper-shadow: rgba(138,121,201,0.08);
+  --lift-shadow: 0 20px 60px rgba(138,121,201,0.07), 0 4px 16px rgba(0,0,0,0.4);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  overflow-x: hidden;
+  line-height: 1.7;
+}
+
+/* ── PAPER TEXTURE ── */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 0;
+  pointer-events: none;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+}
+
+/* ── AMBIENT LAVENDER GLOW ── */
+body::after {
+  content: '';
+  position: fixed;
+  top: -30vh; left: 50%; transform: translateX(-50%);
+  width: 80vw; height: 60vh;
+  background: radial-gradient(ellipse at 50% 0%, rgba(138,121,201,0.04) 0%, transparent 70%);
+  pointer-events: none; z-index: 0;
+}
+
+/* ══════════════════════════════════════════
+   TABLE OF CONTENTS
+══════════════════════════════════════════ */
+#toc {
+  position: fixed; left: 0; top: 50%; transform: translateY(-50%);
+  z-index: 100; padding: 1.5rem 0;
+  display: none;
+}
+@media(min-width: 1100px) { #toc { display: block; } }
+
+.toc-inner {
+  border-right: 1px solid var(--border);
+  padding: 1rem 1.5rem 1rem 1.25rem;
+}
+
+.toc-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.58rem; font-weight: 600; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--muted);
+  margin-bottom: 1rem;
+}
+
+.toc-item {
+  display: block; text-decoration: none;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.62rem; font-weight: 500; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--muted);
+  padding: 0.35rem 0; border-left: 2px solid transparent;
+  padding-left: 0.75rem; margin-left: -0.75rem;
+  transition: color 0.35s, border-color 0.35s;
+  white-space: nowrap;
+}
+.toc-item:hover, .toc-item.active {
+  color: var(--accent2);
+  border-left-color: var(--accent);
+}
+
+/* ══════════════════════════════════════════
+   MAIN DOCUMENT
+══════════════════════════════════════════ */
+#document {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  position: relative; z-index: 1;
+}
+
+/* ── Scroll-based paper lift ── */
+.paper-lift {
+  transition: box-shadow 0.6s ease;
+}
+.paper-lift.lifted {
+  box-shadow: var(--lift-shadow);
+}
+
+/* ══════════════════════════════════════════
+   COVER PAGE
+══════════════════════════════════════════ */
+#cover {
+  min-height: 100svh;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  text-align: center;
+  padding: 4rem 0 6rem;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.doc-classification {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.62rem; font-weight: 600; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--muted);
+  margin-bottom: 3rem;
+}
+
+.doc-seal {
+  width: 96px; height: 96px;
+  margin: 0 auto 3rem;
+  cursor: default;
+}
+.doc-seal img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    animation:sealAppear 1.5s .3s cubic-bezier(.34,1.56,.64,1) both;
+    transform-origin:center;
+    transition:transform .6s cubic-bezier(.34,1.56,.64,1),
+               filter .6s ease;
+    filter:drop-shadow(0 0 25px rgba(138,121,201,.18));
+}
+
+.doc-seal:hover img{
+    transform:rotate(2deg) scale(1.05);
+    filter:drop-shadow(0 0 40px rgba(138,121,201,.35));
+}
+@keyframes sealAppear {
+  from { opacity: 0; transform: scale(0.5) rotate(-15deg); }
+  to { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+
+.draft-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.58rem; font-weight: 700; letter-spacing: 0.3em;
+  text-transform: uppercase; color: var(--accent);
+  border: 1px solid var(--accent);
+  display: inline-block; padding: 0.3rem 1rem;
+  margin-bottom: 2rem;
+  animation: fadeIn 0.8s 0.8s ease both;
+}
+
+.resolution-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.8rem, 8vw, 5.5rem);
+  font-weight: 800; letter-spacing: -0.02em;
+  line-height: 1.05; margin-bottom: 0.5rem;
+  animation: slideUp 0.9s 1s ease both;
+}
+
+.resolution-subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
+  font-style: italic; color: var(--muted);
+  margin-bottom: 3.5rem;
+  animation: slideUp 0.9s 1.1s ease both;
+}
+
+.doc-meta-grid {
+  display: grid; grid-template-columns: 1fr;
+  gap: 0;
+  border: 1px solid var(--border);
+  max-width: 480px; margin: 0 auto 3.5rem;
+  animation: fadeIn 0.8s 1.3s ease both;
+}
+@media(min-width:480px) { .doc-meta-grid { grid-template-columns: 1fr 1fr; } }
+
+.doc-meta-item {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+}
+.doc-meta-item:nth-child(odd) { border-right: 1px solid var(--border); }
+@media(min-width:480px) { .doc-meta-item:nth-last-child(-n+2) { border-bottom: none; } }
+.doc-meta-item:last-child { border-bottom: none; }
+
+.doc-meta-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.56rem; font-weight: 600; letter-spacing: 0.15em;
+  text-transform: uppercase; color: var(--muted);
+  margin-bottom: 0.3rem;
+}
+.doc-meta-value {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem; font-weight: 600; color: var(--text);
+}
+
+.status-badge {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.63rem; font-weight: 600;
+  color: var(--accent); letter-spacing: 0.05em;
+}
+.status-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--accent);
+  animation: blink 2.5s ease infinite;
+}
+@keyframes blink {
+  0%,100% { opacity: 1; } 50% { opacity: 0.25; }
+}
+
+.cover-statement {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.3rem, 3.5vw, 1.85rem);
+  font-style: italic; line-height: 1.55;
+  color: var(--text); max-width: 520px; margin: 0 auto 1rem;
+  animation: fadeIn 0.9s 1.5s ease both;
+}
+.cover-statement em {
+  font-style: normal; font-weight: 600; color: var(--accent2);
+}
+
+.cover-caption {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.78rem; color: var(--muted);
+  animation: fadeIn 0.8s 1.7s ease both;
+}
+
+.scroll-indicator {
+  position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.56rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--muted); animation: fadeIn 1s 2s ease both;
+}
+.scroll-line {
+  width: 1px; height: 36px;
+  background: linear-gradient(to bottom, var(--accent), transparent);
+  animation: scrollPulse 2s ease infinite;
+}
+@keyframes scrollPulse {
+  0%,100% { opacity: 0.4; transform: scaleY(1); }
+  50% { opacity: 0.9; transform: scaleY(0.7); }
+}
+
+/* ══════════════════════════════════════════
+   PREAMBLE
+══════════════════════════════════════════ */
+#preamble {
+  padding: 5rem 0 3rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.preamble-header {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.58rem; font-weight: 700; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--muted);
+  margin-bottom: 2.5rem;
+}
+
+.preamble-text {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 1rem; line-height: 1.95; color: var(--text);
+}
+.preamble-text p { margin-bottom: 1.4rem; }
+.preamble-text strong {
+  font-weight: 700; font-style: italic; color: var(--accent2);
+}
+
+/* ══════════════════════════════════════════
+   ARTICLE SECTIONS
+══════════════════════════════════════════ */
+.article-section {
+  padding: 5rem 0;
+  border-bottom: 1px solid var(--border);
+  opacity: 0; transform: translateY(28px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+.article-section.visible { opacity: 1; transform: none; }
+
+.article-num {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.56rem; font-weight: 700; letter-spacing: 0.3em;
+  text-transform: uppercase; color: var(--muted);
+  margin-bottom: 0.5rem;
+}
+
+.article-clause {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  font-weight: 600; font-style: italic;
+  color: var(--accent2); margin-bottom: 0.4rem;
+  letter-spacing: 0.01em;
+}
+
+.article-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 800; line-height: 1.1;
+  margin-bottom: 2rem; letter-spacing: -0.02em;
+}
+
+.article-separator {
+  display: flex; align-items: center; gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+.article-sep-line { flex: 1; height: 1px; background: var(--border); }
+.article-sep-ornament {
+  color: var(--accent); font-size: 0.85rem; flex-shrink: 0;
+}
+
+.article-body {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.15rem; line-height: 1.9; color: var(--text);
+}
+.article-body p { margin-bottom: 1.3rem; }
+.article-body strong { font-weight: 600; }
+
+/* ══════════════════════════════════════════
+   SERVICE ITEMS (Article II)
+══════════════════════════════════════════ */
+.service-list { margin-top: 2.5rem; }
+.service-item {
+  padding: 1.75rem 0;
+  border-top: 1px solid var(--border);
+  display: grid; grid-template-columns: auto 1fr;
+  gap: 1.5rem; align-items: start;
+  cursor: default;
+  transition: padding-left 0.3s ease;
+}
+.service-item:last-child { border-bottom: 1px solid var(--border); }
+.service-item:hover { padding-left: 0.5rem; }
+
+.service-number {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem; font-weight: 700; color: var(--border);
+  line-height: 1; min-width: 2.5rem;
+  transition: color 0.35s;
+}
+.service-item:hover .service-number { color: var(--accent); }
+
+.service-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem; font-weight: 700; margin-bottom: 0.4rem;
+  transition: color 0.3s;
+}
+.service-item:hover .service-name { color: var(--accent2); }
+.service-desc {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem; color: var(--muted); line-height: 1.7;
+}
+
+/* ── Process Track ── */
+.process-track { margin-top: 3rem; }
+.process-track-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.56rem; font-weight: 600; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--muted); margin-bottom: 1.5rem;
+}
+.process-steps-doc {
+  display: flex; align-items: center; gap: 0;
+  overflow-x: auto; padding-bottom: 0.5rem;
+  -webkit-overflow-scrolling: touch;
+}
+.proc-step {
+  display: flex; align-items: center; gap: 0; flex-shrink: 0;
+}
+.proc-box {
+  border: 1px solid var(--border); padding: 0.6rem 1rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.9rem; font-weight: 600; color: var(--muted);
+  transition: all 0.3s; cursor: default; white-space: nowrap;
+}
+.proc-box:hover { border-color: var(--accent); color: var(--accent2); background: rgba(138,121,201,0.05); }
+.proc-arrow { padding: 0 0.5rem; color: var(--border); font-size: 0.8rem; }
+
+/* ══════════════════════════════════════════
+   CASE STUDY (Article III)
+══════════════════════════════════════════ */
+.case-study {
+  margin-top: 2.5rem;
+  border: 1px solid var(--border);
+  position: relative; overflow: hidden;
+}
+.case-header {
+  border-bottom: 1px solid var(--border);
+  padding: 1.5rem 2rem;
+  display: flex; justify-content: space-between; align-items: flex-start;
+  flex-wrap: wrap; gap: 1rem;
+  background: rgba(138,121,201,0.03);
+}
+.case-id {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.56rem; font-weight: 700; letter-spacing: 0.28em;
+  text-transform: uppercase; color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+.case-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem; font-weight: 700;
+}
+.case-stamp {
+  border: 2px solid var(--accent);
+  padding: 0.4rem 0.9rem; transform: rotate(2deg);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.56rem; font-weight: 700; letter-spacing: 0.15em;
+  text-transform: uppercase; color: var(--accent);
+}
+
+.case-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  border-bottom: 1px solid var(--border);
+}
+@media(min-width:540px) { .case-grid { grid-template-columns: repeat(4, 1fr); } }
+
+.case-field {
+  padding: 1.5rem 2rem;
+  border-right: 1px solid var(--border);
+}
+.case-field:last-child { border-right: none; }
+@media(max-width:539px) {
+  .case-field:nth-child(2) { border-right: none; }
+  .case-field:nth-child(odd) { border-right: 1px solid var(--border); }
+  .case-field:nth-child(3), .case-field:nth-child(4) { border-top: 1px solid var(--border); }
+}
+.case-field-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.54rem; font-weight: 600; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--muted); margin-bottom: 0.4rem;
+}
+.case-field-value {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem; font-weight: 700; color: var(--accent2);
+}
+.case-field-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.85rem; color: var(--muted);
+}
+.case-narrative {
+  padding: 2rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem; line-height: 1.9; color: var(--text);
+}
+.case-timeline {
+  padding: 0 2rem 2rem;
+  display: flex; flex-wrap: wrap; gap: 0; align-items: center;
+}
+.ct-step { display: flex; align-items: center; gap: 0; }
+.ct-box {
+  border: 1px solid var(--accent);
+  padding: 0.4rem 0.85rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.63rem; font-weight: 600; letter-spacing: 0.08em;
+  color: var(--accent); background: rgba(138,121,201,0.05);
+  white-space: nowrap;
+}
+.ct-arrow { padding: 0 0.4rem; color: var(--border); font-size: 0.7rem; }
+
+/* ══════════════════════════════════════════
+   ARTICLE III-B: WHY INSTITUTIONS CHOOSE MUNITE
+══════════════════════════════════════════ */
+.mandate-pillars { margin-top: 2.5rem; }
+
+.mandate-pillar {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 2rem; align-items: start;
+  padding: 2rem 0;
+  border-top: 1px solid var(--border);
+  opacity: 0; transform: translateX(-12px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.mandate-pillar.visible { opacity: 1; transform: none; }
+.mandate-pillar:last-child { border-bottom: 1px solid var(--border); }
+
+.mandate-pillar-num {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.56rem; font-weight: 700; letter-spacing: 0.22em;
+  color: var(--accent); padding-top: 0.2rem;
+  min-width: 2.5rem;
+}
+.mandate-pillar-body {}
+.mandate-pillar-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem; font-weight: 700;
+  margin-bottom: 0.5rem;
+  transition: color 0.3s;
+}
+.mandate-pillar:hover .mandate-pillar-title { color: var(--accent2); }
+.mandate-pillar-desc {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05rem; color: var(--muted); line-height: 1.75;
+}
+
+/* ══════════════════════════════════════════
+   GALLERY (Article VII)
+══════════════════════════════════════════ */
+.gallery-grid {
+  margin-top: 2.5rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+@media(max-width:560px) { .gallery-grid { grid-template-columns: repeat(2, 1fr); } }
+
+.gallery-item {
+  position: relative; overflow: hidden;
+  cursor: pointer;
+  background: var(--paper);
+  border: 1px solid var(--border);
+}
+.gallery-item.tall { grid-row: span 2; }
+.gallery-item.wide { grid-column: span 2; }
+@media(max-width:560px) {
+  .gallery-item.wide { grid-column: span 1; }
+}
+
+.gallery-item img {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+  transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94), filter 0.5s ease;
+  aspect-ratio: 4/3;
+  filter: grayscale(20%) brightness(0.85);
+}
+.gallery-item.tall img { aspect-ratio: 3/4; }
+.gallery-item:hover img {
+  transform: scale(1.05);
+  filter: grayscale(0%) brightness(1);
+}
+
+.gallery-item-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(10,10,13,0.85) 0%, transparent 50%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  display: flex; align-items: flex-end;
+  padding: 1.25rem;
+}
+.gallery-item:hover .gallery-item-overlay { opacity: 1; }
+
+.gallery-item-caption {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.58rem; font-weight: 600; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--accent2);
+}
+
+/* Placeholder for gallery images */
+.gallery-placeholder {
+  width: 100%; height: 100%;
+  min-height: 180px;
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, var(--paper) 0%, rgba(42,39,53,0.4) 100%);
+  position: relative;
+}
+.gallery-item.tall .gallery-placeholder { min-height: 380px; }
+.gallery-placeholder-icon {
+  width: 32px; height: 32px;
+  opacity: 0.2;
+}
+.gallery-placeholder-icon svg { width: 100%; height: 100%; }
+
+/* ── LIGHTBOX ── */
+#lightbox {
+  position: fixed; inset: 0; z-index: 9000;
+  background: rgba(10,10,13,0.97);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+#lightbox.open { opacity: 1; pointer-events: all; }
+
+#lightbox-img {
+  max-width: 90vw; max-height: 85vh;
+  object-fit: contain;
+  transform: scale(0.92);
+  transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
+  box-shadow: 0 0 80px rgba(138,121,201,0.15);
+}
+#lightbox.open #lightbox-img { transform: scale(1); }
+
+#lightbox-placeholder {
+  width: 70vw; max-width: 700px; height: 50vh;
+  display: flex; align-items: center; justify-content: center;
+  border: 1px solid var(--border);
+  background: var(--paper);
+  transform: scale(0.92);
+  transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
+}
+#lightbox.open #lightbox-placeholder { transform: scale(1); }
+
+.lightbox-placeholder-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--muted);
+}
+
+#lightbox-close {
+  position: absolute; top: 1.5rem; right: 1.5rem;
+  background: none; border: 1px solid var(--border);
+  color: var(--muted); cursor: pointer;
+  width: 40px; height: 40px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Inter', sans-serif; font-size: 0.85rem;
+  transition: border-color 0.2s, color 0.2s;
+}
+#lightbox-close:hover { border-color: var(--accent); color: var(--accent2); }
+
+#lightbox-caption {
+  position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.56rem; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--muted);
+  white-space: nowrap;
+}
+
+.lightbox-nav {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  background: none; border: 1px solid var(--border);
+  color: var(--muted); cursor: pointer;
+  width: 44px; height: 44px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem;
+  transition: border-color 0.2s, color 0.2s;
+}
+.lightbox-nav:hover { border-color: var(--accent); color: var(--accent2); }
+#lightbox-prev { left: 1.5rem; }
+#lightbox-next { right: 1.5rem; }
+@media(max-width:560px) {
+  #lightbox-prev { left: 0.75rem; }
+  #lightbox-next { right: 0.75rem; }
+}
+
+/* ══════════════════════════════════════════
+   TESTIMONIALS (Article V)
+══════════════════════════════════════════ */
+.witness-section { margin-top: 2.5rem; }
+
+.witness-statement {
+  padding: 3.5rem 0;
+  border-top: 1px solid var(--border);
+  display: grid; grid-template-columns: 1fr;
+  gap: 2rem;
+}
+@media(min-width:640px) {
+  .witness-statement { grid-template-columns: 160px 1fr; gap: 3.5rem; }
+}
+.witness-statement:last-child { border-bottom: 1px solid var(--border); }
+
+.witness-meta { flex-shrink: 0; }
+.witness-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.54rem; font-weight: 600; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem;
+}
+.witness-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem; font-weight: 700; margin-bottom: 0.3rem;
+}
+.witness-role {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.7rem; color: var(--muted); line-height: 1.5;
+}
+
+.witness-quote {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.35rem, 3vw, 1.8rem);
+  font-style: italic; line-height: 1.65; color: var(--text);
+}
+.witness-quote::before {
+  content: '\201C';
+  font-size: 3.5rem; line-height: 0.5; vertical-align: -0.55rem;
+  color: var(--accent); margin-right: 0.05rem;
+  font-style: normal; opacity: 0.6;
+}
+.witness-quote::after {
+  content: '\201D';
+  font-size: 3.5rem; line-height: 0.5; vertical-align: -0.55rem;
+  color: var(--accent); margin-left: 0.05rem;
+  font-style: normal; opacity: 0.6;
+}
+
+/* ══════════════════════════════════════════
+   SIGNATORIES (Article VI)
+══════════════════════════════════════════ */
+.signatories { margin-top: 2.5rem; }
+
+.signatory {
+  padding: 3.5rem 0;
+  border-top: 1px solid var(--border);
+  display: grid; gap: 2.5rem;
+}
+@media(min-width:600px) { .signatory { grid-template-columns: 220px 1fr; } }
+.signatory:last-child { border-bottom: 1px solid var(--border); }
+
+.signatory-photo-wrap {
+  margin-bottom: 1.5rem;
+}
+.signatory-photo {
+  width: 80px; height: 80px;
+  border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  background: var(--paper);
+  margin-bottom: 0.75rem;
+  overflow: hidden;
+}
+.signatory-photo img {
+  width: 100%; height: 100%; object-fit: cover;
+  filter: grayscale(20%);
+}
+.signatory-photo-placeholder {
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, var(--paper) 0%, rgba(42,39,53,0.5) 100%);
+}
+.signatory-photo-placeholder svg {
+  width: 32px; height: 32px; opacity: 0.2;
+}
+
+.signatory-role-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.54rem; font-weight: 600; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem;
+}
+.signatory-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem; font-weight: 800; margin-bottom: 0.3rem;
+}
+.signatory-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic; color: var(--muted); font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+.signatory-bio {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.72rem; color: var(--muted); line-height: 1.6;
+  margin-bottom: 1.75rem;
+}
+
+.signature-line {
+  width: 200px; border-bottom: 1px solid var(--text);
+  margin-bottom: 0.3rem;
+  padding-bottom: 0.25rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.6rem; font-style: italic;
+  color: var(--accent2); letter-spacing: 0.04em;
+}
+.signature-caption {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.56rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--muted);
+}
+
+.signatory-right {}
+.signatory-vision-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.54rem; font-weight: 600; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--muted); margin-bottom: 1rem;
+}
+.signatory-statement {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem; line-height: 1.9; color: var(--text);
+  font-style: italic;
+  padding-left: 1.5rem; border-left: 2px solid var(--border);
+  margin-bottom: 1.5rem;
+}
+.signatory-vision {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.95rem; line-height: 1.8; color: var(--muted);
+  padding-left: 1.5rem; border-left: 2px solid rgba(138,121,201,0.2);
+}
+
+/* ══════════════════════════════════════════
+   CONTACT (Article VIII)
+══════════════════════════════════════════ */
+#article-viii {
+  padding: 5rem 0 2rem;
+}
+
+.contact-resolution {
+  border: 1px solid var(--border);
+  margin-top: 2.5rem;
+  transition: box-shadow 0.4s ease;
+}
+.contact-resolution:focus-within {
+  box-shadow: 0 0 40px rgba(138,121,201,0.06);
+}
+
+.contact-resolution-header {
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid var(--border);
+  background: rgba(138,121,201,0.03);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.58rem; font-weight: 600; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--muted);
+}
+
+.contact-form-area { padding: 2rem; }
+
+.contact-body-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05rem; line-height: 1.85; color: var(--muted);
+  margin-bottom: 2rem; font-style: italic;
+}
+
+.form-row { display: grid; gap: 1rem; margin-bottom: 1.25rem; }
+@media(min-width:540px) { .form-row.two { grid-template-columns: 1fr 1fr; } }
+@media(min-width:540px) { .form-row.three { grid-template-columns: 1fr 1fr 1fr; } }
+
+.form-field { display: flex; flex-direction: column; gap: 0.4rem; }
+.form-lbl {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.56rem; font-weight: 600; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--muted);
+}
+.form-inp, .form-ta, .form-sel {
+  background: transparent; border: none; border-bottom: 1px solid var(--border);
+  padding: 0.65rem 0;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05rem; color: var(--text); outline: none;
+  transition: border-color 0.3s;
+  -webkit-appearance: none;
+}
+.form-inp:focus, .form-ta:focus, .form-sel:focus { border-color: var(--accent); }
+.form-inp::placeholder, .form-ta::placeholder { color: var(--border); }
+.form-ta { resize: none; height: 90px; }
+.form-sel { cursor: pointer; }
+.form-sel option { background: var(--paper); color: var(--text); }
+
+.submit-btn {
+  background: var(--accent); color: var(--bg);
+  border: none; padding: 0.95rem 2.5rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.7rem; font-weight: 600; letter-spacing: 0.18em;
+  text-transform: uppercase; cursor: pointer;
+  margin-top: 1.25rem;
+  transition: background 0.3s, transform 0.15s, box-shadow 0.3s;
+}
+.submit-btn:hover {
+  background: var(--accent2); color: var(--bg);
+  box-shadow: 0 4px 24px rgba(138,121,201,0.25);
+}
+.submit-btn:active { transform: scale(0.98); }
+.submit-btn:disabled {
+  opacity: 0.5; cursor: not-allowed; transform: none;
+}
+
+.contact-channels {
+  border-top: 1px solid var(--border);
+  padding: 1.5rem 2rem;
+  display: flex; gap: 2rem; flex-wrap: wrap; align-items: center;
+}
+.contact-ch {
+  display: flex; align-items: center; gap: 0.75rem;
+  text-decoration: none; color: var(--text);
+  transition: color 0.25s;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem;
+}
+.contact-ch:hover { color: var(--accent2); }
+.ch-icon {
+  width: 34px; height: 34px; border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.9rem; flex-shrink: 0;
+  transition: border-color 0.25s;
+}
+.contact-ch:hover .ch-icon { border-color: var(--accent); }
+.ch-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.56rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--muted); display: block;
+}
+.ch-val { font-size: 0.9rem; }
+
+/* ══════════════════════════════════════════
+   SUCCESS MODAL
+══════════════════════════════════════════ */
+#success-modal {
+  position: fixed; inset: 0; z-index: 8000;
+  display: flex; align-items: center; justify-content: center;
+  padding: 1.5rem;
+  background: rgba(10,10,13,0.9);
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.4s ease;
+  backdrop-filter: blur(4px);
+}
+#success-modal.open { opacity: 1; pointer-events: all; }
+
+.modal-panel {
+  background: var(--paper);
+  border: 1px solid var(--border);
+  padding: 3rem 2.5rem 2.5rem;
+  max-width: 480px; width: 100%;
+  position: relative;
+  transform: translateY(20px) scale(0.97);
+  transition: transform 0.5s cubic-bezier(0.34,1.56,0.64,1);
+  box-shadow: 0 0 80px rgba(138,121,201,0.08);
+}
+#success-modal.open .modal-panel { transform: none; }
+
+.modal-stamp {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.56rem; font-weight: 700; letter-spacing: 0.28em;
+  text-transform: uppercase; color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+.modal-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem; font-weight: 800; margin-bottom: 1rem;
+  line-height: 1.15;
+}
+.modal-body {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05rem; line-height: 1.85; color: var(--muted);
+  margin-bottom: 1.75rem;
+  font-style: italic;
+}
+
+.modal-ref {
+  border: 1px solid var(--border);
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.75rem;
+  background: rgba(138,121,201,0.03);
+}
+.modal-ref-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.54rem; font-weight: 600; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--muted); margin-bottom: 0.4rem;
+}
+.modal-ref-value {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05rem; font-weight: 600; color: var(--accent2);
+  letter-spacing: 0.04em;
+}
+
+.modal-actions {
+  display: flex; gap: 0.75rem; flex-wrap: wrap;
+}
+.modal-btn {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.66rem; font-weight: 600; letter-spacing: 0.15em;
+  text-transform: uppercase; cursor: pointer;
+  padding: 0.75rem 1.5rem;
+  transition: all 0.25s;
+}
+.modal-btn-primary {
+  background: var(--accent); color: var(--bg); border: none;
+}
+.modal-btn-primary:hover {
+  background: var(--accent2); color: var(--bg);
+}
+.modal-btn-secondary {
+  background: transparent; color: var(--muted);
+  border: 1px solid var(--border);
+}
+.modal-btn-secondary:hover { border-color: var(--accent); color: var(--accent2); }
+
+#modal-close {
+  position: absolute; top: 1.25rem; right: 1.25rem;
+  background: none; border: 1px solid var(--border);
+  color: var(--muted); cursor: pointer;
+  width: 36px; height: 36px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.85rem;
+  transition: border-color 0.2s, color 0.2s;
+}
+#modal-close:hover { border-color: var(--accent); color: var(--accent2); }
+
+/* ══════════════════════════════════════════
+   FOOTER
+══════════════════════════════════════════ */
+footer {
+  padding: 4rem 0 5rem;
+  text-align: center;
+  border-top: 1px solid var(--border);
+}
+
+.footer-seal {
+  margin: 0 auto 2rem;
+  display: inline-block;
+}
+
+.attestation-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.9rem; font-style: italic; color: var(--muted);
+  max-width: 480px; margin: 0 auto 2rem; line-height: 1.8;
+}
+
+.footer-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem; font-weight: 800; color: var(--accent2);
+  letter-spacing: 0.1em; margin-bottom: 0.3rem;
+}
+.footer-tagline {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic; color: var(--muted); font-size: 0.95rem;
+}
+
+/* ══════════════════════════════════════════
+   MOBILE STICKY
+══════════════════════════════════════════ */
+.mobile-sticky {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 200;
+  padding: 1rem 1.5rem;
+  background: var(--paper);
+  border-top: 1px solid var(--border);
+  display: flex; justify-content: center;
+  transition: opacity 0.3s;
+}
+@media(min-width:768px) { .mobile-sticky { display: none; } }
+
+.mobile-sticky-btn {
+  background: var(--accent); color: var(--bg);
+  border: none; padding: 0.9rem 2.5rem; font-weight: 700;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.7rem; letter-spacing: 0.18em;
+  text-transform: uppercase; cursor: pointer;
+  width: 100%; max-width: 380px;
+  transition: background 0.25s;
+  min-height: 48px;
+}
+.mobile-sticky-btn:hover { background: var(--accent2); color: var(--bg); }
+
+/* ══════════════════════════════════════════
+   ANIMATIONS
+══════════════════════════════════════════ */
+@keyframes fadeIn {
+  from { opacity: 0; } to { opacity: 1; }
+}
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ══════════════════════════════════════════
+   MOBILE
+══════════════════════════════════════════ */
+@media(max-width:560px) {
+  #document { padding: 0 1.25rem; }
+  .article-section { padding: 3.5rem 0; }
+  .contact-form-area { padding: 1.5rem; }
+  .contact-resolution-header { padding: 1.25rem 1.5rem; }
+  .contact-channels { padding: 1.25rem 1.5rem; gap: 1.25rem; }
+  .case-header { padding: 1.25rem 1.5rem; }
+  .case-field { padding: 1.25rem 1.5rem; }
+  .case-narrative { padding: 1.5rem; }
+  .case-timeline { padding: 0 1.5rem 1.5rem; }
+  .modal-panel { padding: 2.5rem 1.5rem 2rem; }
+  .witness-statement { padding: 2.5rem 0; }
+  .signatory { padding: 2.5rem 0; }
+  #cover { padding: 3rem 0 5rem; }
+  .resolution-title { font-size: 2.8rem; }
+  body { padding-bottom: 80px; }
+}
+</style>
+</head>
+<body>
+
+<!-- FLOATING TABLE OF CONTENTS -->
+<nav id="toc" aria-label="Document Contents">
+  <div class="toc-inner">
+    <div class="toc-label">Contents</div>
+    <a class="toc-item" href="#cover">Resolution</a>
+    <a class="toc-item" href="#preamble">Preamble</a>
+    <a class="toc-item" href="#article-i">Article I</a>
+    <a class="toc-item" href="#article-ii">Article II</a>
+    <a class="toc-item" href="#article-iii">Article III</a>
+    <a class="toc-item" href="#article-iv">Article IV</a>
+    <a class="toc-item" href="#article-v">Article V</a>
+    <a class="toc-item" href="#article-vi">Article VI</a>
+    <a class="toc-item" href="#article-vii">Article VII</a>
+    <a class="toc-item" href="#article-viii">Article VIII</a>
+  </div>
+</nav>
+
+<div id="document" class="paper-lift">
+
+  <!-- COVER -->
+  <section id="cover">
+    <div class="doc-classification">Ref. No. MUNITE/2026/001 &nbsp;·&nbsp; General Assembly &nbsp;·&nbsp; Restricted</div>
+
+    <!-- Diplomatic Seal -->
+    <div class="doc-seal" aria-label="MUNITE Official Logo">
+        <img src="MUNITE LOGO.png" alt="MUNITE Logo" class="cover-logo">
+    </div>
+
+    <div class="draft-label">Draft Resolution</div>
+    <h1 class="resolution-title">MUNITE</h1>
+    <p class="resolution-subtitle">Future Diplomats Assembly</p>
+
+    <div class="doc-meta-grid">
+      <div class="doc-meta-item">
+        <div class="doc-meta-label">Sponsor</div>
+        <div class="doc-meta-value">MUNITE</div>
+      </div>
+      <div class="doc-meta-item">
+        <div class="doc-meta-label">Committee</div>
+        <div class="doc-meta-value">Future Diplomats Assembly</div>
+      </div>
+      <div class="doc-meta-item">
+        <div class="doc-meta-label">Agenda</div>
+        <div class="doc-meta-value">Building The Next Generation Of Global Leaders</div>
+      </div>
+      <div class="doc-meta-item">
+        <div class="doc-meta-label">Status</div>
+        <div class="doc-meta-value">
+          <div class="status-badge"><span class="status-dot"></span> Under Active Consideration</div>
+        </div>
+      </div>
+    </div>
+
+    <p class="cover-statement">
+      Every leader speaks for the first time.<br>
+      Every diplomat starts <em>somewhere</em>.<br>
+      We help schools create that moment.
+    </p>
+    <p class="cover-caption">Scroll to read the full resolution ↓</p>
+
+    <div class="scroll-indicator" aria-hidden="true">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <!-- PREAMBLE -->
+  <section id="preamble">
+    <div class="preamble-header">— Preamble</div>
+    <div class="preamble-text">
+      <p><strong>Guided by</strong> the belief that diplomacy is not a skill reserved for the powerful, but a discipline that must be cultivated in classrooms, committee rooms, and the minds of young people everywhere,</p>
+      <p><strong>Recognizing</strong> that the next generation of world leaders, negotiators, and public servants is currently seated in school halls across India, waiting for the right opportunity to find their voice,</p>
+      <p><strong>Convinced</strong> that professional, well-organized Model United Nations conferences are among the most powerful educational tools available to institutions today,</p>
+      <p><strong>Having observed</strong> the transformative impact of conference participation on delegate confidence, research capabilities, and global awareness,</p>
+      <p>The following resolution is hereby submitted for consideration.</p>
+    </div>
+  </section>
+
+  <!-- ARTICLE I: ABOUT -->
+  <section class="article-section" id="article-i">
+    <div class="article-num">— Article I</div>
+    <div class="article-clause">Recognizing</div>
+    <h2 class="article-title">The Organization</h2>
+    <div class="article-separator">
+      <div class="article-sep-line"></div>
+      <div class="article-sep-ornament">✦</div>
+      <div class="article-sep-line"></div>
+    </div>
+    <div class="article-body">
+      <p><em>Recognizing the importance of diplomacy, leadership, and global awareness among students</em>, MUNITE is a youth-led organization that partners with schools and colleges to host professional Model United Nations conferences across India.</p>
+      <p>We provide end-to-end conference management: from the design of committees and agenda topics, to the training of delegates, the recruitment of executive boards, the execution of logistics, and the strategic marketing that ensures every seat is filled.</p>
+      <p>Our founding conviction is simple, that the quality of a student's MUN experience should not depend on the size or resources of their institution. Every school deserves a world-class conference. Every student deserves a stage.</p>
+      <p>MUNITE was built to make that possible.</p>
+    </div>
+  </section>
+
+  <!-- ARTICLE II: SERVICES -->
+  <section class="article-section" id="article-ii">
+    <div class="article-num">— Article II</div>
+    <div class="article-clause">Affirms</div>
+    <h2 class="article-title">The Services</h2>
+    <div class="article-separator">
+      <div class="article-sep-line"></div>
+      <div class="article-sep-ornament">✦</div>
+      <div class="article-sep-line"></div>
+    </div>
+    <div class="article-body">
+      <p><em>Affirms the need for professionally organized conferences and comprehensive student preparation,</em> the following services are provided under the MUNITE mandate:</p>
+    </div>
+
+    <div class="service-list">
+      <div class="service-item">
+        <div class="service-number">I</div>
+        <div>
+          <div class="service-name">School MUN Conferences</div>
+          <div class="service-desc">End-to-end conference design and execution tailored for schools beginning or expanding their MUN journey. MUNITE manages every dimension — your institution hosts, your students shine.</div>
+        </div>
+      </div>
+      <div class="service-item">
+        <div class="service-number">II</div>
+        <div>
+          <div class="service-name">College MUN Conferences</div>
+          <div class="service-desc">Professional management of large-scale university conferences featuring advanced committee structures, crisis committees, and sophisticated delegate engagement strategies.</div>
+        </div>
+      </div>
+      <div class="service-item">
+        <div class="service-number">III</div>
+        <div>
+          <div class="service-name">Delegate Training Sessions</div>
+          <div class="service-desc">Intensive workshops on public speaking, diplomatic negotiation, position paper writing, and MUN rules of procedure, designed to transform hesitant students into confident floor speakers.</div>
+        </div>
+      </div>
+      <div class="service-item">
+        <div class="service-number">IV</div>
+        <div>
+          <div class="service-name">Executive Board Recruitment</div>
+          <div class="service-desc">Careful selection and preparation of Chairs, Vice-Chairs, and Directors of the International Press Corps — the individuals who set the tone and standard of every committee session.</div>
+        </div>
+      </div>
+      <div class="service-item">
+        <div class="service-number">V</div>
+        <div>
+          <div class="service-name">Committee &amp; Agenda Design</div>
+          <div class="service-desc">Crafting intellectually stimulating study guides, relevant real-world agenda topics, and committee structures calibrated to the experience level of your delegates.</div>
+        </div>
+      </div>
+      <div class="service-item">
+        <div class="service-number">VI</div>
+        <div>
+          <div class="service-name">Event Management &amp; Logistics</div>
+          <div class="service-desc">Venue coordination, scheduling, technical infrastructure, registration management, and day-of operations, handled with the precision of a professional event firm.</div>
+        </div>
+      </div>
+      <div class="service-item">
+        <div class="service-number">VII</div>
+        <div>
+          <div class="service-name">Marketing &amp; Outreach</div>
+          <div class="service-desc">Strategic promotion across social channels and school networks, designed to drive strong delegate registrations and build the reputation of your conference across the region.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="process-track">
+      <div class="process-track-label">— The MUNITE Process</div>
+      <div class="process-steps-doc">
+        <div class="proc-step">
+          <div class="proc-box">Idea &amp; Scoping</div>
+          <div class="proc-arrow">→</div>
+        </div>
+        <div class="proc-step">
+          <div class="proc-box">Strategic Planning</div>
+          <div class="proc-arrow">→</div>
+        </div>
+        <div class="proc-step">
+          <div class="proc-box">Delegate Training</div>
+          <div class="proc-arrow">→</div>
+        </div>
+        <div class="proc-step">
+          <div class="proc-box">EB Recruitment</div>
+          <div class="proc-arrow">→</div>
+        </div>
+        <div class="proc-step">
+          <div class="proc-box">Conference Day</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ARTICLE III: PAST EVENTS -->
+  <section class="article-section" id="article-iii">
+    <div class="article-num">— Article III</div>
+    <div class="article-clause">Acknowledges</div>
+    <h2 class="article-title">Successful Implementation</h2>
+    <div class="article-separator">
+      <div class="article-sep-line"></div>
+      <div class="article-sep-ornament">✦</div>
+      <div class="article-sep-line"></div>
+    </div>
+    <div class="article-body">
+      <p><em>Acknowledges the successful implementation of the MUNITE mandate at the following institution,</em> with full documented outcomes presented below:</p>
+    </div>
+
+    <div class="case-study">
+      <div class="case-header">
+        <div>
+          <div class="case-id">Case Study 001</div>
+          <div class="case-name">Pawar Public School, Pune</div>
+        </div>
+        <div class="case-stamp">Completed Successfully</div>
+      </div>
+      <div class="case-grid">
+        <div class="case-field">
+          <div class="case-field-label">Delegates</div>
+          <div class="case-field-value" data-count="65">0</div>
+          <div class="case-field-sub">Registered participants</div>
+        </div>
+        <div class="case-field">
+          <div class="case-field-label">Committees</div>
+          <div class="case-field-value" data-count="2">0</div>
+          <div class="case-field-sub">Active committees</div>
+        </div>
+        <div class="case-field">
+          <div class="case-field-label">Duration</div>
+          <div class="case-field-value">2</div>
+          <div class="case-field-sub">Days of conference</div>
+        </div>
+        <div class="case-field">
+          <div class="case-field-label">Date</div>
+          <div class="case-field-value" style="font-size:1.1rem;">Jun 2025</div>
+          <div class="case-field-sub">22nd – 23rd June</div>
+        </div>
+      </div>
+      <div class="case-narrative">
+        Pawar Public School, Pune became the first partner institution to host a MUNITE-managed conference. Over two days in June 2025, sixty-five delegates engaged across two committees, debating issues of contemporary global significance under the guidance of a professionally trained executive board. The conference proceeded without incident, concluding with a formal award ceremony and delegate feedback session.
+      </div>
+      <div class="case-timeline">
+        <div class="ct-step">
+          <div class="ct-box">Planning</div>
+          <div class="ct-arrow">→</div>
+        </div>
+        <div class="ct-step">
+          <div class="ct-box">Delegate Preparation</div>
+          <div class="ct-arrow">→</div>
+        </div>
+        <div class="ct-step">
+          <div class="ct-box">Conference</div>
+          <div class="ct-arrow">→</div>
+        </div>
+        <div class="ct-step">
+          <div class="ct-box">Success</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ARTICLE IV: WHY INSTITUTIONS CHOOSE MUNITE (NEW) -->
+  <section class="article-section" id="article-iv">
+    <div class="article-num">— Article IV</div>
+    <div class="article-clause">Affirms</div>
+    <h2 class="article-title">Why Institutions Choose MUNITE</h2>
+    <div class="article-separator">
+      <div class="article-sep-line"></div>
+      <div class="article-sep-ornament">✦</div>
+      <div class="article-sep-line"></div>
+    </div>
+    <div class="article-body">
+      <p><em>Further affirms the distinct qualities of the MUNITE mandate</em> as observed and attested to by institutional partners, and hereby places on record the following operative provisions:</p>
+    </div>
+
+    <div class="mandate-pillars">
+      <div class="mandate-pillar">
+        <div class="mandate-pillar-num">01</div>
+        <div class="mandate-pillar-body">
+          <div class="mandate-pillar-title">Professional Conference Execution</div>
+          <div class="mandate-pillar-desc">Every MUNITE conference is conducted to the standard of a professional international event — from the opening ceremony to the final gavel. Institutions receive the full benefit of rigorous operational planning, structured timelines, and experienced on-ground management that leaves no detail to chance.</div>
+        </div>
+      </div>
+      <div class="mandate-pillar">
+        <div class="mandate-pillar-num">02</div>
+        <div class="mandate-pillar-body">
+          <div class="mandate-pillar-title">Experienced Organizing Team</div>
+          <div class="mandate-pillar-desc">The MUNITE team brings direct, documented experience in MUN design and execution. Each member has served in conference roles at multiple levels — as delegate, chair, and organizer — providing institutional partners with a team that understands the demands of a conference from every vantage point.</div>
+        </div>
+      </div>
+      <div class="mandate-pillar">
+        <div class="mandate-pillar-num">03</div>
+        <div class="mandate-pillar-body">
+          <div class="mandate-pillar-title">Customized Committee Structures</div>
+          <div class="mandate-pillar-desc">No two institutions are alike. MUNITE builds committee configurations — scope, agenda, procedural complexity, and size — calibrated to the specific experience level, student body, and aspirations of each partner school. The conference reflects the institution, not a generic template.</div>
+        </div>
+      </div>
+      <div class="mandate-pillar">
+        <div class="mandate-pillar-num">04</div>
+        <div class="mandate-pillar-body">
+          <div class="mandate-pillar-title">End-to-End Event Support</div>
+          <div class="mandate-pillar-desc">Partnership with MUNITE is comprehensive. Institutions need not coordinate between vendors, trainers, and event managers independently. MUNITE serves as the singular point of responsibility — from the first planning call to the closing ceremony — ensuring seamless, coordinated delivery throughout.</div>
+        </div>
+      </div>
+      <div class="mandate-pillar">
+        <div class="mandate-pillar-num">05</div>
+        <div class="mandate-pillar-body">
+          <div class="mandate-pillar-title">Strong Focus on Delegate Experience</div>
+          <div class="mandate-pillar-desc">The measure of any conference is not its logistics — it is the quality of the experience a delegate carries home. MUNITE designs each event with this metric at its centre: substantive debate, meaningful engagement, and an atmosphere that makes students feel they are participating in something genuinely significant.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ARTICLE V: TESTIMONIALS -->
+  <section class="article-section" id="article-v">
+    <div class="article-num">— Article V</div>
+    <div class="article-clause">Further Notes</div>
+    <h2 class="article-title">Witness Statements</h2>
+    <div class="article-separator">
+      <div class="article-sep-line"></div>
+      <div class="article-sep-ornament">✦</div>
+      <div class="article-sep-line"></div>
+    </div>
+    <div class="article-body">
+      <p><em>Further notes the following testimonies submitted by delegates and faculty members following the conclusion of the Pawar Public School conference:</em></p>
+    </div>
+
+    <div class="witness-section">
+      <div class="witness-statement">
+        <div class="witness-meta">
+          <div class="witness-label">Statement No. 001</div>
+          <div class="witness-name">Shaurya</div>
+          <div class="witness-role">Delegate<br>Pawar Public School MUN</div>
+        </div>
+        <div class="witness-quote">
+          The most rewarding moment wasn't delivering rulings or maintaining procedure. It was watching delegates who were hesitant during the first session confidently challenge each other's ideas by the final committee. A successful conference isn't remembered because every speech was perfect—it's remembered because every student left believing they had something worth saying. That is what I witnessed at MUNITE.
+        </div>
+      </div>
+      <div class="witness-statement">
+        <div class="witness-meta">
+          <div class="witness-label">Statement No. 002</div>
+          <div class="witness-name">Dhvani</div>
+          <div class="witness-role">Delegate<br>Pawar Public School MUN</div>
+        </div>
+        <div class="witness-quote">
+          There was a strange moment during committee when everyone forgot they were students. The room became the world we were debating. That feeling stayed with me long after the conference ended. I still think about the speeches, the negotiations, and the people I met. It didn't feel like two days. It felt like the beginning of something much bigger.
+        </div>
+      </div>
+      <div class="witness-statement">
+        <div class="witness-meta">
+          <div class="witness-label">Statement No. 003</div>
+          <div class="witness-name">Kajal Ma'am</div>
+          <div class="witness-role">Faculty Coordinator<br>Pawar Public School</div>
+        </div>
+        <div class="witness-quote">
+          Organizing student events usually means expecting uncertainty. What impressed us was not only the professionalism of the execution but the calm confidence with which every challenge was handled. The students saw an event. We saw a team that understood responsibility.
+        </div>
+      </div>
+      <div class="witness-statement">
+        <div class="witness-meta">
+          <div class="witness-label">Statement No. 004</div>
+          <div class="witness-name">Pratibha Ma'am</div>
+          <div class="witness-role">School Administration<br>Pawar Public School</div>
+        </div>
+        <div class="witness-quote">
+          As educators, we often measure success through marks and examinations. This conference reminded us that confidence, empathy, leadership, and curiosity cannot be graded on paper. Watching hesitant students volunteer to speak before hundreds was perhaps the strongest evidence that experiential learning leaves a deeper impact than any classroom lecture.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ARTICLE VI: FOUNDERS -->
+  <section class="article-section" id="article-vi">
+    <div class="article-num">— Article VI</div>
+    <div class="article-clause">Hereby Designates</div>
+    <h2 class="article-title">The Signatories</h2>
+    <div class="article-separator">
+      <div class="article-sep-line"></div>
+      <div class="article-sep-ornament">✦</div>
+      <div class="article-sep-line"></div>
+    </div>
+    <div class="article-body">
+      <p><em>Hereby designates the following individuals as founders and principal signatories of this resolution,</em> and authorizes them to act on behalf of MUNITE in all matters pertaining to conference partnerships:</p>
+    </div>
+
+    <div class="signatories">
+      <div class="signatory">
+        <div class="signatory-left">
+          <div class="signatory-photo-wrap">
+            <div class="signatory-photo">
+              <img src="sakina.jpeg" alt="Sakina">
+            </div>
+          </div>
+          <div class="signatory-role-label">Co-Founder &amp; Signatory</div>
+          <div class="signatory-name">Sakina</div>
+          <div class="signatory-title">Founder, MUNITE</div>
+          <div class="signatory-bio">Believing that diplomacy should never be limited by geography or privilege, Sakina co-founded MUNITE to help institutions create experiences that leave a lifelong mark on students. Her focus lies in building conferences that are remembered not for decorations or awards, but for conversations that change perspectives.</div>
+          <div class="signature-line">Sakina</div>
+          <div class="signature-caption">Signature</div>
+        </div>
+        <div class="signatory-right">
+          <div class="signatory-vision-label">— Statement &amp; Vision</div>
+          <div class="signatory-statement">
+            I never wanted to build another organization. I wanted to build the first place where a student's confidence could arrive before their experience did. If someone leaves a MUNITE conference believing they belong in rooms where decisions are made, then we have already succeeded.
+          </div>
+          <div class="signatory-vision">
+            I imagine a future where every district has at least one school that hosts a conference capable of inspiring students to think beyond textbooks. MUNITE should never become known for the number of conferences it organizes. It should become known for the number of lives that quietly changed because of them.
+          </div>
+        </div>
+      </div>
+      <div class="signatory">
+        <div class="signatory-left">
+          <div class="signatory-photo-wrap">
+            <div class="signatory-photo">
+              <img src="rohan.jpeg" alt="Rohan">
+              
+            </div>
+          </div>
+          <div class="signatory-role-label">Co-Founder &amp; Signatory</div>
+          <div class="signatory-name">Rohan</div>
+          <div class="signatory-title">Founder, MUNITE</div>
+          <div class="signatory-bio">Driven by a passion for systems, innovation, and youth leadership, Rohan co-founded MUNITE with the belief that every successful conference is built on invisible precision. His work combines technology, operations, and strategic planning to create experiences that feel effortless for every participant.</div>
+          <div class="signature-line">Rohan</div>
+          <div class="signature-caption">Signature</div>
+        </div>
+        <div class="signatory-right">
+          <div class="signatory-vision-label">— Statement &amp; Vision</div>
+          <div class="signatory-statement">
+            People remember the speeches. I remember everything that made those speeches possible. Every registration, every committee, every detail behind the scenes exists so delegates can focus on what truly matters—finding their voice.
+          </div>
+          <div class="signatory-vision">
+            The future of MUNITE is not measured by expansion alone. It is measured by trust. I want institutions to think of MUNITE the way they think of excellence—something consistent, dependable, and impossible to compromise. If one student discovers a lifelong passion for diplomacy because of something we created, every hour invested becomes worthwhile.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ARTICLE VII: GALLERY -->
+  <section class="article-section" id="article-vii">
+    <div class="article-num">— Article VII</div>
+    <div class="article-clause">Presents</div>
+    <h2 class="article-title">The Record</h2>
+    <div class="article-separator">
+      <div class="article-sep-line"></div>
+      <div class="article-sep-ornament">✦</div>
+      <div class="article-sep-line"></div>
+    </div>
+    <div class="article-body">
+      <p><em>Presents the following photographic record of conference proceedings,</em> submitted as formal evidence of the MUNITE mandate in active execution at Pawar Public School, Pune, June 2025:</p>
+    </div>
+
+    <div class="gallery-grid" id="gallery-grid">
+      <!-- TALL: replace src with your image -->
+      <div class="gallery-item tall" data-index="0" data-caption="Opening Ceremony · Pawar Public School MUN · June 2025" role="button" tabindex="0" aria-label="View image 1: Opening Ceremony">
+        <div class="gallery-placeholder">
+          <img src="opening ceremony.jpeg" alt="Opening Ceremony">
+          
+        </div>
+        <div class="gallery-item-overlay">
+          <div class="gallery-item-caption">Opening Ceremony</div>
+        </div>
+      </div>
+      <!-- STANDARD -->
+      <div class="gallery-item" data-index="1" data-caption="Committee Session · June 2025" role="button" tabindex="0" aria-label="View image 2: Committee Session">
+        <div class="gallery-placeholder">
+          <img src="comittee session.jpeg" alt="Committee Session">
+          
+        </div>
+        <div class="gallery-item-overlay">
+          <div class="gallery-item-caption">Committee Session</div>
+        </div>
+      </div>
+      <!-- STANDARD -->
+      <div class="gallery-item" data-index="2" data-caption="Delegate Debate · General Assembly · June 2025" role="button" tabindex="0" aria-label="View image 3: Delegate Debate">
+        <div class="gallery-placeholder">
+          <img src="delegate debate.jpeg" alt="Delegate Debate">
+          
+        </div>
+        <div class="gallery-item-overlay">
+          <div class="gallery-item-caption">Delegate Debate</div>
+        </div>
+      </div>
+      <!-- WIDE -->
+      <div class="gallery-item wide" data-index="3" data-caption="Award Ceremony · Closing Session · June 2025" role="button" tabindex="0" aria-label="View image 4: Award Ceremony">
+        <div class="gallery-placeholder">
+          <img src="award ceremony.jpeg" alt="Award Ceremony">
+          
+        </div>
+        <div class="gallery-item-overlay">
+          <div class="gallery-item-caption">Award Ceremony</div>
+        </div>
+      </div>
+      <!-- STANDARD -->
+      <div class="gallery-item" data-index="4" data-caption="Glimpses of the committee · June 2025" role="button" tabindex="0" aria-label="View image 5: Delegate Registration">
+        <div class="gallery-placeholder">
+          <img src="glimpses.jpeg" alt="Glimpses of the committee">
+          <div class="gallery-placeholder-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg></div>
+        </div>
+        <div class="gallery-item-overlay">
+          <div class="gallery-item-caption">Glimpses of the committee</div>
+        </div>
+      </div>
+      <!-- STANDARD -->
+      <div class="gallery-item" data-index="5" data-caption="Executive Board · Chair Preparation · June 2025" role="button" tabindex="0" aria-label="View image 6: Executive Board">
+        <div class="gallery-placeholder">
+          <img src="executive board.jpeg" alt="Executive Board">
+          
+        </div>
+        <div class="gallery-item-overlay">
+          <div class="gallery-item-caption">Executive Board</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ARTICLE VIII: CONTACT -->
+  <section class="article-section" id="article-viii">
+    <div class="article-num">— Article VIII</div>
+    <div class="article-clause">Invites</div>
+    <h2 class="article-title">Partnership Enquiries</h2>
+    <div class="article-separator">
+      <div class="article-sep-line"></div>
+      <div class="article-sep-ornament">✦</div>
+      <div class="article-sep-line"></div>
+    </div>
+    <div class="article-body">
+      <p><em>Invites all interested schools and colleges to submit formal partnership requests,</em> to be reviewed and responded to within 24 hours of receipt by the MUNITE team:</p>
+    </div>
+
+    <div class="contact-resolution">
+      <div class="contact-resolution-header">— Submission of Partnership Request</div>
+      <div class="contact-form-area">
+        <div class="contact-body-text">To initiate a partnership with MUNITE, complete the form below. All enquiries are treated with the same seriousness as a diplomatic submission.</div>
+        <form id="partnership-form" novalidate>
+          <div class="form-row two">
+            <div class="form-field">
+              <label class="form-lbl" for="f-institution">Institution Name</label>
+              <input class="form-inp" id="f-institution" name="institutionName" type="text" placeholder="Your school or college" required>
+            </div>
+            <div class="form-field">
+              <label class="form-lbl" for="f-contact">Your Name</label>
+              <input class="form-inp" id="f-contact" name="contactPerson" type="text" placeholder="Principal / Teacher / Organizer" required>
+            </div>
+          </div>
+          <div class="form-row two">
+            <div class="form-field">
+              <label class="form-lbl" for="f-email">Email Address</label>
+              <input class="form-inp" id="f-email" name="email" type="email" placeholder="you@institution.edu.in" required>
+            </div>
+            <div class="form-field">
+              <label class="form-lbl" for="f-phone">Phone Number</label>
+              <input class="form-inp" id="f-phone" name="phone" type="tel" placeholder="+91 98765 43210">
+            </div>
+          </div>
+          <div class="form-row two">
+            <div class="form-field">
+              <label class="form-lbl" for="f-city">City</label>
+              <input class="form-inp" id="f-city" name="city" type="text" placeholder="e.g. Pune, Mumbai, Delhi">
+            </div>
+            <div class="form-field">
+              <label class="form-lbl" for="f-orgtype">Organization Type</label>
+              <select class="form-sel" id="f-orgtype" name="organizationType">
+                <option value="">Select type</option>
+                <option value="School">School</option>
+                <option value="College">College</option>
+                <option value="University">University</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-field">
+              <label class="form-lbl" for="f-message">Conference Brief</label>
+              <textarea class="form-ta" id="f-message" name="message" placeholder="Expected delegates, preferred dates, any prior MUN experience…"></textarea>
+            </div>
+          </div>
+          <button type="submit" class="submit-btn" id="submit-btn">Submit Partnership Request</button>
+        </form>
+      </div>
+      <div class="contact-channels">
+        <a href="mailto:munite1931@gmail.com" class="contact-ch">
+          <div class="ch-icon">✉</div>
+          <div>
+            <span class="ch-label">Direct Correspondence</span>
+            <span class="ch-val">munite1931@gmail.com</span>
+          </div>
+        </a>
+        <a href="https://instagram.com/munite_1931" target="_blank" rel="noopener" class="contact-ch">
+          <div class="ch-icon">◈</div>
+          <div>
+            <span class="ch-label">Instagram</span>
+            <span class="ch-val">@munite_1931</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-seal">
+      <svg width="60" height="60" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="46" fill="none" stroke="var(--accent2)" stroke-width="0.8" opacity="0.3"/>
+        <ellipse cx="50" cy="50" rx="22" ry="22" fill="none" stroke="var(--accent)" stroke-width="0.8" opacity="0.6"/>
+        <ellipse cx="50" cy="50" rx="12" ry="22" fill="none" stroke="var(--accent)" stroke-width="0.6" opacity="0.5"/>
+        <ellipse cx="50" cy="50" rx="22" ry="8" fill="none" stroke="var(--accent)" stroke-width="0.6" opacity="0.5"/>
+        <line x1="28" y1="50" x2="72" y2="50" stroke="var(--accent)" stroke-width="0.6" opacity="0.4"/>
+        <line x1="50" y1="28" x2="50" y2="72" stroke="var(--accent)" stroke-width="0.6" opacity="0.4"/>
+      </svg>
+    </div>
+    <div class="attestation-text">
+      This resolution is submitted in good faith by MUNITE and remains open for endorsement by any institution committed to the education of future global leaders.
+    </div>
+    <div class="footer-logo">MUNITE</div>
+    <div class="footer-tagline">Where Global Minds Unite</div>
+    <div style="margin-top:2rem;font-family:'Inter',sans-serif;font-size:0.58rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);">
+      © 2026 MUNITE &nbsp;·&nbsp; All Rights Reserved &nbsp;·&nbsp; Ref. MUNITE/2026/001
+    </div>
+  </footer>
+
+</div><!-- /document -->
+
+<!-- MOBILE STICKY -->
+<div class="mobile-sticky" id="mobile-sticky">
+  <button class="mobile-sticky-btn" onclick="document.getElementById('article-viii').scrollIntoView({behavior:'smooth'})">
+    Submit Partnership Request
+  </button>
+</div>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+  <button id="lightbox-close" aria-label="Close lightbox">✕</button>
+  <button class="lightbox-nav" id="lightbox-prev" aria-label="Previous image">←</button>
+  <button class="lightbox-nav" id="lightbox-next" aria-label="Next image">→</button>
+  <!-- Real image (hidden when placeholder) -->
+  <img id="lightbox-img" src="" alt="" style="display:none;">
+  <!-- Placeholder panel -->
+  <div id="lightbox-placeholder">
+    <div class="lightbox-placeholder-text" id="lightbox-placeholder-text"></div>
+  </div>
+  <div id="lightbox-caption"></div>
+</div>
+
+<!-- SUCCESS MODAL -->
+<div id="success-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal-panel">
+    <button id="modal-close" aria-label="Close">✕</button>
+    <div class="modal-stamp">Resolution Received</div>
+    <h2 class="modal-title" id="modal-title">Your request has been submitted.</h2>
+    <div class="modal-body">
+      Your partnership request has officially been submitted to MUNITE. A member of the team will respond within 24 hours of receipt.
+    </div>
+    <div class="modal-ref">
+      <div class="modal-ref-label">Reference Number</div>
+      <div class="modal-ref-value" id="modal-ref-value">—</div>
+    </div>
+    <div class="modal-actions">
+      <button class="modal-btn modal-btn-secondary" id="modal-copy-btn">Copy Reference</button>
+      <button class="modal-btn modal-btn-primary" id="modal-close-btn">Close</button>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+// ══════════════════════════════════════════
+//  SCROLL REVEAL — Article sections
+// ══════════════════════════════════════════
+const sections = document.querySelectorAll('.article-section');
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      revealObserver.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.06, rootMargin: '0px 0px -40px 0px' });
+sections.forEach(s => revealObserver.observe(s));
+
+// ── Mandate pillars staggered reveal ──
+const pillars = document.querySelectorAll('.mandate-pillar');
+const pillarObserver = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      const idx = Array.from(pillars).indexOf(e.target);
+      setTimeout(() => {
+        e.target.classList.add('visible');
+      }, idx * 80);
+      pillarObserver.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1 });
+pillars.forEach(p => pillarObserver.observe(p));
+
+// ══════════════════════════════════════════
+//  TOC ACTIVE STATE
+// ══════════════════════════════════════════
+const tocItems = document.querySelectorAll('.toc-item');
+const allSections = document.querySelectorAll('#cover, #preamble, .article-section');
+
+const tocObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      tocItems.forEach(t => t.classList.remove('active'));
+      const match = document.querySelector(`.toc-item[href="#${e.target.id}"]`);
+      if (match) match.classList.add('active');
+    }
+  });
+}, { threshold: 0.35 });
+allSections.forEach(s => tocObserver.observe(s));
+
+// ══════════════════════════════════════════
+//  PAPER LIFT ON SCROLL
+// ══════════════════════════════════════════
+const paperEl = document.getElementById('document');
+let liftTimer;
+window.addEventListener('scroll', () => {
+  paperEl.classList.add('lifted');
+  clearTimeout(liftTimer);
+  liftTimer = setTimeout(() => paperEl.classList.remove('lifted'), 600);
+}, { passive: true });
+
+// ══════════════════════════════════════════
+//  COUNTER ANIMATION
+// ══════════════════════════════════════════
+const counters = document.querySelectorAll('[data-count]');
+const countObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const el = e.target;
+      const target = parseInt(el.getAttribute('data-count'));
+      let start = 0;
+      const step = (target / 1200) * 16;
+      const timer = setInterval(() => {
+        start += step;
+        if (start >= target) { el.textContent = target; clearInterval(timer); }
+        else el.textContent = Math.floor(start);
+      }, 16);
+      countObserver.unobserve(el);
+    }
+  });
+}, { threshold: 0.5 });
+counters.forEach(c => countObserver.observe(c));
+
+// ══════════════════════════════════════════
+//  MOBILE STICKY: HIDE ON CONTACT
+// ══════════════════════════════════════════
+const contactSec = document.getElementById('article-viii');
+const mobileSticky = document.getElementById('mobile-sticky');
+const stickyObserver = new IntersectionObserver(([e]) => {
+  mobileSticky.style.opacity = e.isIntersecting ? '0' : '1';
+  mobileSticky.style.pointerEvents = e.isIntersecting ? 'none' : 'auto';
+}, { threshold: 0.1 });
+stickyObserver.observe(contactSec);
+
+// ══════════════════════════════════════════
+//  GALLERY LIGHTBOX
+// ══════════════════════════════════════════
+const galleryItems = document.querySelectorAll('.gallery-item');
+const lightbox = document.getElementById('lightbox');
+const lbImg = document.getElementById('lightbox-img');
+const lbPlaceholder = document.getElementById('lightbox-placeholder');
+const lbPlaceholderText = document.getElementById('lightbox-placeholder-text');
+const lbCaption = document.getElementById('lightbox-caption');
+let currentLbIndex = 0;
+
+function openLightbox(index) {
+  currentLbIndex = index;
+  const item = galleryItems[index];
+  const caption = item.getAttribute('data-caption') || '';
+  const realImg = item.querySelector('img');
+
+  lbCaption.textContent = caption;
+
+  if (realImg && realImg.src) {
+    lbImg.src = realImg.src;
+    lbImg.alt = realImg.alt || caption;
+    lbImg.style.display = 'block';
+    lbPlaceholder.style.display = 'none';
+  } else {
+    lbImg.style.display = 'none';
+    lbPlaceholder.style.display = 'flex';
+    lbPlaceholderText.textContent = caption || `Image ${index + 1} of ${galleryItems.length}`;
+  }
+
+  lightbox.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  document.getElementById('lightbox-close').focus();
+}
+
+function closeLightbox() {
+  lightbox.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function navigateLightbox(dir) {
+  currentLbIndex = (currentLbIndex + dir + galleryItems.length) % galleryItems.length;
+  openLightbox(currentLbIndex);
+}
+
+galleryItems.forEach((item, i) => {
+  item.addEventListener('click', () => openLightbox(i));
+  item.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(i); } });
+});
+
+document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+document.getElementById('lightbox-prev').addEventListener('click', () => navigateLightbox(-1));
+document.getElementById('lightbox-next').addEventListener('click', () => navigateLightbox(1));
+
+lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+
+document.addEventListener('keydown', e => {
+  if (!lightbox.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowLeft') navigateLightbox(-1);
+  if (e.key === 'ArrowRight') navigateLightbox(1);
+});
+
+// Mobile swipe
+let touchStartX = 0;
+lightbox.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+lightbox.addEventListener('touchend', e => {
+  const dx = e.changedTouches[0].clientX - touchStartX;
+  if (Math.abs(dx) > 50) navigateLightbox(dx < 0 ? 1 : -1);
+}, { passive: true });
+
+// ══════════════════════════════════════════
+//  SUCCESS MODAL
+// ══════════════════════════════════════════
+const successModal = document.getElementById('success-modal');
+const modalRefValue = document.getElementById('modal-ref-value');
+let currentRefNumber = '';
+
+function openModal(refId) {
+  currentRefNumber = refId;
+  modalRefValue.textContent = 'MUNITE-' + refId.substring(0, 12).toUpperCase();
+  successModal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  document.getElementById('modal-close').focus();
+}
+
+function closeModal() {
+  successModal.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.getElementById('modal-close').addEventListener('click', closeModal);
+document.getElementById('modal-close-btn').addEventListener('click', closeModal);
+document.getElementById('modal-copy-btn').addEventListener('click', () => {
+  const text = modalRefValue.textContent;
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(text).then(() => {
+      const btn = document.getElementById('modal-copy-btn');
+      btn.textContent = 'Copied';
+      setTimeout(() => { btn.textContent = 'Copy Reference'; }, 2000);
+    });
+  }
+});
+successModal.addEventListener('click', e => { if (e.target === successModal) closeModal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && successModal.classList.contains('open')) closeModal(); });
+
+// ══════════════════════════════════════════
+//  FIREBASE FORM SUBMISSION
+//
+//  HOW TO CONFIGURE:
+//  1. Go to https://console.firebase.google.com
+//  2. Create / open your project
+//  3. Go to Project Settings > Your apps > Web app
+//  4. Copy the firebaseConfig object
+//  5. Paste it inside the <script type="module"> block at the top of this file
+//     (replacing the placeholder values)
+//  6. In the Firebase console, create a Firestore database
+//  7. The collection "partnership_requests" will be created automatically
+//     on first form submission
+// ══════════════════════════════════════════
+const form = document.getElementById('partnership-form');
+const submitBtn = document.getElementById('submit-btn');
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  const db = window.__firebaseDB;
+  const addDoc = window.__firestoreAdd;
+  const collection = window.__firestoreCollection;
+  const serverTimestamp = window.__firestoreServerTimestamp;
+
+  if (!db || !addDoc || !collection || !serverTimestamp) {
+    // Firebase not configured — show config instructions
+    console.warn('Firebase not configured. Paste your firebaseConfig at the top of the file.');
+    openModal('demo-' + Date.now());
+    form.reset();
+    return;
+  }
+
+  const getData = (id) => document.getElementById(id)?.value?.trim() || '';
+
+  const payload = {
+    institutionName:  getData('f-institution'),
+    contactPerson:    getData('f-contact'),
+    email:            getData('f-email'),
+    phone:            getData('f-phone'),
+    city:             getData('f-city'),
+    organizationType: getData('f-orgtype'),
+    message:          getData('f-message'),
+    timestamp:        serverTimestamp(),
+    status:           'New',
+    notes:            ''
+  };
+
+  submitBtn.textContent = 'Submitting…';
+  submitBtn.disabled = true;
+
+  try {
+    const docRef = await addDoc(collection(db, 'partnership_requests'), payload);
+    form.reset();
+    openModal(docRef.id);
+  } catch (err) {
+    console.error('Firestore error:', err);
+    submitBtn.textContent = 'Submission Failed — Please Email Us';
+    submitBtn.style.background = '#8C3A3A';
+    setTimeout(() => {
+      submitBtn.textContent = 'Submit Partnership Request';
+      submitBtn.style.background = '';
+      submitBtn.disabled = false;
+    }, 4000);
+    return;
+  }
+
+  submitBtn.textContent = 'Submit Partnership Request';
+  submitBtn.disabled = false;
+});
+</script>
+</body>
+</html>
